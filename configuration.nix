@@ -164,7 +164,7 @@ in
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users = {
   	leo = {
-      hashedPassword = "$6$uSWUcYA6Ld$mSLPjfiTNl6Y4wwoW3o2JV8yk0TeYAwYs9AWl3NDxITVbXz/8LMPokZklA1WS0Y8S3.Ed9H6CzT.TFlL3giCO1";
+      hashedPassword = "$6$RUyDB/Dhf7YYb1Ei$19sZsm9C5MS6tV2OyWS/IQM46f1S./7uBEA8avSxjNnUf.FL8hetMoT3xLmGzphluEvp9coAUcWoug5mJgeub0";
       description = "Leo Ronnebro";
   		isNormalUser = true;
    		extraGroups = [ "wheel" "docker" "kvm" ];
