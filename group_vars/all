@@ -1,8 +1,0 @@
-dotfiles_user_home: "{{ '~' | expanduser }}"
-dotfiles_home: "{{ dotfiles_user_home }}/Projects/dotfiles"
-
-full_name: Leo Rönnebro
-git_user: TheNerdyHamster
-git_email: leo.ronnebro@nerdyhamster.net
-git_signingkey: 89CC9285D0957C81
-git_sign_commits: true
