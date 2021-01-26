@@ -79,7 +79,6 @@
   };
 
   programs = {
-    command-not-found.enable = true;
     # zsh = {
     #   enable = true;
     #   shellInit = "neofetch";
@@ -160,16 +159,14 @@
 
   system = {
     autoUpgrade = {
-      enable = true;
-      dates = "20:30";
-      flake = "github:TheNerdyHamster/nix-config";
-      flags = [ "--update-input nixpkgs" "--no-write-lock-file" ];
+      # enable = true;
+      # dates = "20:30";
+      # flake = "github:TheNerdyHamster/nix-home";
+      # flags = [ "--update-input nixpkgs" "--no-write-lock-file" ];
     };
   };
   # Enable sound.
   sound.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
 
   # Enable Redshift.
   services.redshift = {
@@ -193,11 +190,10 @@
     mkpasswd
     unzip
     zip
-    git
     feh
     diff-so-fancy
     autorandr
-    slock
+    pinentry
 
     dmenu
     neofetch
@@ -216,7 +212,6 @@
     mullvad-vpn
     spotify
     openfortivpn
-    home-manager
 
     # Programming
 
