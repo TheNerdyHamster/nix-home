@@ -104,6 +104,23 @@
         history.ignoreSpace = true;
 
         initExtraFirst = "neofetch";
+        envExtra = "export GPG_TTY=$(tty)";
+        sessionVariables = {
+            # Start blinking
+            LESS_TERMCAP_mb = "$(tput bold; tput setaf 4)"; # Blue
+            # Start bold
+            LESS_TERMCAP_md = "$(tput bold; tput setaf 4)"; # Blue
+            # Start standout
+            LESS_TERMCAP_so = "$(tput bold; tput rev; tput setaf 6)"; # Cyan
+            # End standout
+            LESS_TERMCAP_se = "$(tput rmso; tput sgr0)";
+            # Start underline
+            LESS_TERMCAP_us = "$(tput smul; tput bold; tput setaf 5)"; # Magenta
+            # End bold, blinking, standout, underline
+            LESS_TERMCAP_me = "$(tput sgr0)";
+          };
+
+
 
         shellAliases = {
           bc = "bc -l";
