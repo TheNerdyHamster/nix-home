@@ -104,6 +104,15 @@
     keyMap = "us";
   };
 
+  security.sudo.enable = false;
+  security.doas.enable = true;
+  security.doas.extraRules = [
+    {
+      groups = [ "wheel" ];
+      keepEnv = true;
+      persist = true;
+    }
+  ];
   # Configure keymap in X11
   services = {
     xserver = {

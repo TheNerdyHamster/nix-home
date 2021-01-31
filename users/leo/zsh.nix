@@ -27,9 +27,10 @@
 
 
     shellAliases = {
+      sudo = "doas"; # The reason behind this is becuase of the sudo plugin for Oh-My-ZSH
       bc = "bc -l";
       c = "clear";
-      ls = "ls -lA --color=auto";
+      ls = "ls -l --color=auto";
       ping = "ping -c 5";
 
       vi = "nvim";
