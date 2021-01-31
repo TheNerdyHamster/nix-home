@@ -7,7 +7,8 @@
 {
   imports = [
     /etc/nixos/hardware-configuration.nix
-    ../../profiles/system.nix
+    ./system.nix
+    ../../users/home-manager.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -30,7 +31,6 @@
         preLVM = true;
       };
     };
-
   };
 
   nix = {
@@ -38,11 +38,9 @@
     maxJobs = 8;
     package = pkgs.nixUnstable;
     extraOptions = ''
-      experimental-features = nix-command
+      experimental-features = nix-command flakes
     '';
   };
-
-  nixpkgs.config = { allowUnfree = true; };
 
   hardware = {
     cpu.intel.updateMicrocode = true;
@@ -71,33 +69,20 @@
     networkmanager.enable = true;
   };
 
+  users.users = {
+    leo = {
+      hashedPassword = "$6$RUyDB/Dhf7YYb1Ei$19sZsm9C5MS6tV2OyWS/IQM46f1S./7uBEA8avSxjNnUf.FL8hetMoT3xLmGzphluEvp9coAUcWoug5mJgeub0";
+      description = "Leo Ronnebro";
+      isNormalUser = true;
+      extraGroups = [ "wheel" "docker" "kvm" "networkmanager" "libvirtd" ];
+      uid = 1000;
+      shell = pkgs.zsh;
+    };
+  };
+
   environment.variables = {
     EDITOR = "nvim";
     VISUAL = "nvim";
-
-    #LESS = "
-  };
-
-  programs = {
-    # zsh = {
-    #   enable = true;
-    #   shellInit = "neofetch";
-    #   enableBashCompletion = true;
-    #   enableCompletion = true;
-    #   autosuggestions.enable = true;
-    #   syntaxHighlighting.enable = true;
-    #   ohMyZsh = {
-    #     enable = true;
-    #     plugins = [ ];
-
-    #   };
-    # };
-
-    gnupg.agent = {
-      enable = true;
-      enableSSHSupport = true;
-      pinentryFlavor = "tty";
-    };
 
   };
 
@@ -111,12 +96,6 @@
 
     kvmgt = { enable = true; };
   };
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  #networking.useDHCP = false;
-  #networking.interfaces.enp1s0.useDHCP = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -157,6 +136,16 @@
 
   };
 
+  nixpkgs.config = {
+    allowUnfree = true;
+
+    manual.manpages.enable = true;
+  };
+
+  programs.steam.enable = true;
+  services.yubikey-agent.enable = true;
+  services.pcscd.enable = true;
+
   system = {
     autoUpgrade = {
       # enable = true;
@@ -173,7 +162,7 @@
     enable = true;
     brightness = {
       day = "1";
-      night = "0.90";
+      night = "0.80";
     };
     temperature = {
       day = 6500;
@@ -199,6 +188,7 @@
     neofetch
     picom
 
+    docker-compose
     nodejs
     ruby
     yarn
@@ -212,6 +202,9 @@
     mullvad-vpn
     spotify
     openfortivpn
+    openssl
+    opensc
+    jq
 
     # Programming
 
@@ -220,6 +213,7 @@
     brave
     discord
     slack
+    betterlockscreen
   ];
 
   # Open ports in the firewall.

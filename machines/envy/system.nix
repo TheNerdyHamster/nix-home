@@ -6,10 +6,6 @@ let
 in
 {
 
-  imports = [
-    ../users/leo/base.nix
-  ];
-
   boot = {
     hardwareScan = true;
     cleanTmpDir = true;
