@@ -5,6 +5,7 @@
     ./gpg.nix
     ./zsh.nix
     ./starship
+    ./golang.nix
   ];
 
   #programs.home-manager.enable = true;
