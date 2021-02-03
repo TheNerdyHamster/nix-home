@@ -3,7 +3,7 @@
 let
   name = "Leo Rönnebro";
   email = "leo.ronnebro@nerdyhamster.net";
-  gpgKey = "E7C90F51";
+  gpgKey = "19E9C5526E7C1583";
 in
 {
   programs.git = {

@@ -9,6 +9,7 @@
     /etc/nixos/hardware-configuration.nix
     ./system.nix
     ../../users/home-manager.nix
+    ../../profiles/yubikey-gpg.nix
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -19,9 +20,7 @@
       grub = {
         enable = true;
         version = 2;
-        efiSupport = true;
-        enableCryptodisk = true;
-        device = "nodev";
+        efiSupport = true; enableCryptodisk = true; device = "nodev";
       };
     };
 
@@ -130,8 +129,6 @@
 
     printing.enable = true;
 
-    openssh.enable = true;
-
     tlp.enable = true;
 
     sysstat.enable = true;
@@ -152,8 +149,6 @@
   };
 
   programs.steam.enable = true;
-  services.yubikey-agent.enable = true;
-  services.pcscd.enable = true;
 
   system = {
     autoUpgrade = {
@@ -214,6 +209,7 @@
     openssl
     opensc
     jq
+    busybox
 
     # Programming
 
@@ -223,6 +219,8 @@
     discord
     slack
     betterlockscreen
+    scrot
+    watson
   ];
 
   # Open ports in the firewall.
