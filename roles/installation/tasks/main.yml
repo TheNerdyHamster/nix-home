@@ -1,0 +1,37 @@
+---
+
+vars_prompt:
+  - name: "disk_name"
+    prompt: "Disk used for formatting"
+    private: no
+
+  - name: "vg_name"
+    prompt: "Enter VG name"
+    private: no
+
+tasks:
+  - name: Update system clock (Installation)
+    command: |
+      timedatectl set-ntp true
+
+  - name: Install reflector to sync mirror lists (Installation)
+    pacman:
+      name: reflector
+      state: present
+
+  - name: Sync mirror list (Installation)
+    command: |
+      reflector -c Sweden -a 12 --sort rate --save /etc/pacman.d/mirrorlist
+    args: /etc/pacman.d/mirrorlist
+
+  - name: Sync pacman package database (Installation)
+    pacman:
+      update_cache: yes
+
+  - name: Create system partitions
+    shell: |
+      sgdisk -d 1 /dev/"{{ disk_name }}"
+
+
+
+

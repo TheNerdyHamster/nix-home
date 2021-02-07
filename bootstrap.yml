@@ -1,0 +1,35 @@
+---
+
+- hosts: all
+  pre_tasks:
+    - name: Install updates (Debian)
+      tags: always
+      apt:
+        upgrade: dist
+        update_cache: yes
+      when: ansible_distribution == "Debian"
+
+
+- hosts: all
+  tasks:
+    - name: Create automation user
+      tags: always
+      user:
+        name: automation
+        groups: root
+
+    - name: Add ssh key for automation
+      tags: always
+      authorized_key:
+        state: present
+        user: automation
+        key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILEcs6s/RHU2mH8jpgY8M1ZA+ex7fmlPINm0Uwx5I7aN ansible"
+
+    - name: Add sudoers file for automation
+      tags: always
+      copy:
+        src: sudoers_automation
+        dest: /etc/sudoers.d/automation
+        owner: root
+        group: root
+        mode: 0440

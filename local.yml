@@ -1,0 +1,13 @@
+---
+
+- hosts: all
+  pre_tasks:
+    - name: Install updates (Debian)
+      tags: always
+      apt:
+        upgrade: dist
+        update_cache: yes
+      when: ansible_distribution == "Debian"
+
+
+- hosts: all
