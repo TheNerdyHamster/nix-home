@@ -21,10 +21,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
 
-if [[ "$INSIDE_EMACS" = 'vterm' ]]; then
-    alias clear='vterm_printf "51;Evterm-clear-scrollback";tput clear'
-fi
-
 autoload -U add-zsh-hook
 add-zsh-hook -Uz chpwd (){ print -Pn "\e]2;%m:%2~\a" }
 KUBECONFIG="$(find ~/.kube/configs/ -type f -exec printf '%s:' '{}' +)"
@@ -35,6 +31,7 @@ zplug "plugins/git",            from:oh-my-zsh
 zplug "plugins/ssh-agent",      from:oh-my-zsh
 zplug "zsh-users/zsh-autosuggestions", defer:2
 zplug "zdharma/fast-syntax-highlighting", defer:2
+zplug "kazhala/dotbare", defer:2
 
 if ! zplug check; then
     zplug install
@@ -79,7 +76,7 @@ alias pacsyu='sudo pacman -Syyu'                 # update only standard pkgs
 alias parsua='paru -Sua --noconfirm'              # update only AUR pkgs
 alias parsyu='paru -Syu --noconfirm'              # update standard pkgs and AUR pkgs
 alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
-alias cleanup='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages
+alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'  # remove orphaned packages
 
 # Utils
 alias scrot="scrot '%Y-%m-%d_$w$h.png' -e 'mv $f ~/Pictures/screenshots'"
@@ -97,18 +94,12 @@ alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 
 # Switching between shells
 alias tozsh="sudo chsh $USER -s /bin/zsh && echo 'Now log out.'"
-alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 
 # Exports
 GPG_TTY=`tty`
 export GPG_TTY
 
-# Emacs
-alias e="emacsclient --tty --alternate-editor="
-alias equick="emacs --quick"
-
-#this makes emacs the default editor for programs like git
-export VISUAL=e
+export VISUAL=vim
 
 export LANG=en_US.UTF-8
 
@@ -121,6 +112,8 @@ export PATH="$PATH:$HOME/.yarn/bin"
 # Dotnet tools
 export PATH="$PATH:$HOME/.dotnet/tools"
 
+# Rust tools
+export PATH="$PATH:$HOME/.cargo/bin"
 # Composer
 export PATH="$PATH:$HOME/.config/composer/vendor/bin"
 
@@ -141,8 +134,8 @@ export LESS_TERMCAP_me=$(tput sgr0)
 # Completion
 # Helm
 source <(helm completion zsh)
-# Kubeone
-source <(kubeone completion zsh)
+# Kubectl
+source <(kubectl completion zsh)
 # DotNET
 _dotnet_zsh_complete()
 {
