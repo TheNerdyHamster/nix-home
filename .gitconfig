@@ -66,3 +66,6 @@
 	defaultBranch = main
 [status]
 	submodulesummary = true
+[user]
+	email = leo.ronnebro@nerdyhamster.net
+	name = Leo Rönnebro
