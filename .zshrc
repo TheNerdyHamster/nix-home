@@ -103,6 +103,9 @@ export VISUAL=vim
 
 export LANG=en_US.UTF-8
 
+# DotBare
+export DOTBARE_DIR="$HOME/.dotfiles"
+
 # Golang
 export PATH="$PATH:$HOME/go/bin"
 
@@ -130,6 +133,11 @@ export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
 export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 5) # Magenta
 # End bold, blinking, standout, underline
 export LESS_TERMCAP_me=$(tput sgr0)
+
+# Functions
+function re() {
+   paru -Qq | fzf -q "$1" -m --preview 'paru -Qi {1}' | xargs -ro paru -Rns
+}
 
 # Completion
 # Helm
